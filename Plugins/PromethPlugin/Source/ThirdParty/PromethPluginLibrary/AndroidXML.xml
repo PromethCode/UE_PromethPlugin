@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- steps to add to build additions -->
+<root xmlns:android="http://schemas.android.com/apk/res/android">
+  <!-- init section is always evaluated once per architecture -->
+  <init>
+    <log text="GameFramework init"/>
+    <setBool result="bSupported" value="false"/>
+    <isArch arch="armeabi-v7a">
+      <setBool result="bSupported" value="true"/>
+    </isArch>
+  </init>
+
+  <!-- optional files or directories to copy to Intermediate/Android/APK -->
+  <resourceCopies>
+    
+    
+    <log text="=======Copying lib_texture_decoder_plugin.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/lib_texture_decoder_plugin.so" dst="$S(BuildDir)/libs/arm64-v8a/lib_texture_decoder_plugin.so" />
+    <log text="=======Copying libFastBase64.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libFastBase64.so" dst="$S(BuildDir)/libs/arm64-v8a/libFastBase64.so" />
+
+    <!-- 
+    <log text="=======Copying lib_mesh_decoder_plugin.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/lib_mesh_decoder_plugin.so" dst="$S(BuildDir)/libs/arm64-v8a/lib_mesh_decoder_plugin.so" />
+    <log text="=======Copying libavcodec-57.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libavcodec-57.so" dst="$S(BuildDir)/libs/arm64-v8a/libavcodec-57.so" />
+    <log text="=======Copying libavdevice-57.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libavdevice-57.so" dst="$S(BuildDir)/libs/arm64-v8a/libavdevice-57.so" />
+    <log text="=======Copying libavfilter-6.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libavfilter-6.so" dst="$S(BuildDir)/libs/arm64-v8a/libavfilter-6.so" />
+    <log text="=======Copying libavformat-57.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libavformat-57.so" dst="$S(BuildDir)/libs/arm64-v8a/libavformat-57.so" />
+    <log text="=======Copying libavutil-55.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libavutil-55.so" dst="$S(BuildDir)/libs/arm64-v8a/libavutil-55.so" />
+    <log text="=======Copying libpostproc-54.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libpostproc-54.so" dst="$S(BuildDir)/libs/arm64-v8a/libpostproc-54.so" />
+    <log text="=======Copying libswresample-2.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libswresample-2.so" dst="$S(BuildDir)/libs/arm64-v8a/libswresample-2.so" />
+    <log text="=======Copying libswscale-4.so======="/>
+    <copyFile src="$S(PluginDir)/Android/arm64-v8a/libswscale-4.so" dst="$S(BuildDir)/libs/arm64-v8a/libswscale-4.so" />
+    -->
+  </resourceCopies>
+</root>

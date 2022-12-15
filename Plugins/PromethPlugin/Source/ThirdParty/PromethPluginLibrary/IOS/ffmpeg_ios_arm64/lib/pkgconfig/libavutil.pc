@@ -1,0 +1,14 @@
+prefix=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output
+exec_prefix=${prefix}
+libdir=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output/lib
+includedir=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 55.78.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil -lm
+Libs.private: 
+Cflags: -I${includedir}
