@@ -31,7 +31,7 @@ void EmptyLinkFunctionForGeneratedCodePromethPlugin_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x0E2F7B47,
+				0x5C6212A2,
 				0xDA472557,
 				METADATA_PARAMS(nullptr, 0)
 			};

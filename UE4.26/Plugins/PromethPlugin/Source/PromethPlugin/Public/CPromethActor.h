@@ -67,6 +67,8 @@ public:
 		void CloseVideo();
 	UFUNCTION(BlueprintCallable, Category = "OtherFunction")
 		void ChangeMaterial(UMaterialInterface* NewMaterial);
+   
+
 
 public:
 	// 时间相关函数   ---------------------------------------------------------------------------------------------------------------
@@ -302,7 +304,6 @@ public:
 	static IVideoPlayer* PromethAPI;
 	static int32 CallBackConst;
 	static TMap<FString, TPair<TWeakObjectPtr<ACPromethActor>, int32>>AllPromethActor;
-
 public:
 	// TestParam
 	float aveLocation = 0;

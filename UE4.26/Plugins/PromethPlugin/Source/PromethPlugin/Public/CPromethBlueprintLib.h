@@ -1,4 +1,4 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
@@ -38,7 +38,8 @@ public:
 		static bool SaveTXT( FString Str,  FString Path);
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "PromethStaticFun")
 		static StaticPromethPlatform StaticGetPlatform();
-
+    UFUNCTION(BlueprintCallable, BlueprintPure, Category = "PromethStaticFun")
+        static FString GetIOSTmpDir();
 
 public:
 	// 获取指针长度

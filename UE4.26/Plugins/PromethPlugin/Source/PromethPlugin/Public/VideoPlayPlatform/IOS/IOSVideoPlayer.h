@@ -23,7 +23,11 @@ typedef void (*StopPlay)(const char* decoderID);
 typedef void (*SuspendPlay)(const char* decoderID);
 typedef void (*ResumePlay)(const char* decoderID);
 typedef void (*SeekAtFrameIndex)(const char* decoderID, const int frameIndex);
+
 typedef TextureDescriptor(*TextureDataAtIndex)(const char* decoderID, unsigned int index);
+typedef UE418TextureDescriptor(*_UE418_TextureDataAtIndex)(const char* sessionID, unsigned int index);
+
+
 typedef VideoStreamInfo(*GetVideoStreamInfo)(const char* decoderID);
 typedef void(*AutoReplay)(const char* decoderID);
 
@@ -38,6 +42,10 @@ typedef void (*_resumeRead)(const char* decoderID);
 typedef Mesh* (*_meshObjectAtIndex)(const char* decoderID, unsigned int index);
 typedef MeshStreamInfo(*_getMeshStreamInfo)(const char* decoderID);
 typedef MeshItemSizeInfo(*_getMeshSizeItemInfo)(const char* decoderID, unsigned int index);
+
+
+
+typedef void (*_xdbgLog)(const char* log);
 // typedef bool (*_updateMeshData)(const char* decoderID, unsigned int index, MeshItemPointers pointers);
 
 
@@ -75,6 +83,7 @@ public:
 	ResumePlay ResumePlayAPI;
 	SeekAtFrameIndex SeekAtFrameIndexAPI;
 	TextureDataAtIndex TextureDataAtIndexAPI;
+    _UE418_TextureDataAtIndex UE418_TextureDataAtIndexAPI;
 	GetVideoStreamInfo GetVideoStreamInfoAPI;
 	AutoReplay AutoReplayAPI;
 
@@ -88,5 +97,8 @@ public:
 	_meshObjectAtIndex MeshObjectAtIndexAPI;
 	_getMeshStreamInfo GetMeshStreamInfoAPI;
 	_getMeshSizeItemInfo GetMeshSizeItemInfoAPI;
+    
+    _xdbgLog XdbgLogAPI;
+    
 	//_updateMeshData UpdateMeshDataAPI;
 };

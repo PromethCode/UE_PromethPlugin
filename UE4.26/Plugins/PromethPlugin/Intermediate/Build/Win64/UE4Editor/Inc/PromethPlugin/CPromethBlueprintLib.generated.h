@@ -17,6 +17,7 @@ struct FColor;
 #define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethBlueprintLib_h_24_SPARSE_DATA
 #define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethBlueprintLib_h_24_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execGetIOSTmpDir); \
 	DECLARE_FUNCTION(execStaticGetPlatform); \
 	DECLARE_FUNCTION(execSaveTXT); \
 	DECLARE_FUNCTION(execScanDirectory); \
@@ -25,6 +26,7 @@ struct FColor;
 
 #define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethBlueprintLib_h_24_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execGetIOSTmpDir); \
 	DECLARE_FUNCTION(execStaticGetPlatform); \
 	DECLARE_FUNCTION(execSaveTXT); \
 	DECLARE_FUNCTION(execScanDirectory); \
