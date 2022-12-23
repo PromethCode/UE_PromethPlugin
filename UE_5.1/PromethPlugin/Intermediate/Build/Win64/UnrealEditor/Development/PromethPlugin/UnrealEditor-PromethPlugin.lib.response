@@ -1,0 +1,12 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-PromethPlugin.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"G:\UE51\G_Test51\Intermediate\Build\Win64\G_Test51Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"G:\UE51\G_Test51\Plugins\PromethPlugin\Intermediate\Build\Win64\UnrealEditor\Development\PromethPlugin\Module.PromethPlugin.cpp.obj"
+"G:\UE51\G_Test51\Plugins\PromethPlugin\Intermediate\Build\Win64\UnrealEditor\Development\PromethPlugin\Default.rc2.res"
+/OUT:"G:\UE51\G_Test51\Plugins\PromethPlugin\Intermediate\Build\Win64\UnrealEditor\Development\PromethPlugin\UnrealEditor-PromethPlugin.lib"

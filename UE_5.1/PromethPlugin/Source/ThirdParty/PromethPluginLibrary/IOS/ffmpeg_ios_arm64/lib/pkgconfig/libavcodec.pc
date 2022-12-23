@@ -1,0 +1,14 @@
+prefix=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output
+exec_prefix=${prefix}
+libdir=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output/lib
+includedir=/Users/lusheng/workspace/ijkplayer-ios/ios/build/ffmpeg-arm64/output/include
+
+Name: libavcodec
+Description: FFmpeg codec library
+Version: 57.107.100
+Requires: libavutil >= 55.78.100
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavcodec -framework CoreFoundation -framework VideoToolbox -framework CoreMedia -framework CoreVideo -lm -lz -pthread -pthread -framework VideoToolbox -framework CoreImage -framework AVFoundation -framework AudioToolbox
+Libs.private: 
+Cflags: -I${includedir}

@@ -1,0 +1,21 @@
+{
+	"RemapUnityFiles": 
+	{
+		"Module.PromethPlugin.cpp.obj": [
+			"CatchLightMesh.gen.cpp.obj",
+			"CPromethActor.gen.cpp.obj",
+			"CPromethBlueprintLib.gen.cpp.obj",
+			"PromethPlugin.init.gen.cpp.obj",
+			"RuntimeFilesDownloaderLibrary.gen.cpp.obj",
+			"CatchLightMesh.cpp.obj",
+			"CLAMBDAThread.cpp.obj",
+			"CPromethActor.cpp.obj",
+			"CPromethBlueprintLib.cpp.obj",
+			"PromethPlugin.cpp.obj",
+			"ReadPromethFun.cpp.obj",
+			"RuntimeFilesDownloaderLibrary.cpp.obj",
+			"IVideoPlayer.cpp.obj",
+			"WindowsVideoPlayer.cpp.obj"
+		]
+	}
+}
