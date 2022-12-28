@@ -1,0 +1,7 @@
+{
+	"SourceFiles": [
+		"E:\\PromethNewPlugin27\\Plugins\\PromethPlugin\\Source\\PromethPlugin\\PromethPlugin.Build.cs",
+		"E:\\PromethNewPlugin27\\Plugins\\PromethPlugin\\Source\\ThirdParty\\PromethPluginLibrary\\PromethPluginLibrary.Build.cs"
+	],
+	"EngineVersion": "4.27.2"
+}

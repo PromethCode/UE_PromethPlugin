@@ -1,0 +1,14 @@
+prefix=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64
+exec_prefix=${prefix}
+libdir=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64/lib
+includedir=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64/include
+
+Name: libavfilter
+Description: FFmpeg audio/video filtering library
+Version: 7.110.100
+Requires: libswscale >= 5.9.100, libavformat >= 58.76.100, libavcodec >= 58.134.100, libswresample >= 3.9.100, libavutil >= 56.70.100
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavfilter -pthread -lm
+Libs.private: 
+Cflags: -I${includedir}

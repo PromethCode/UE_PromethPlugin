@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-PromethPlugin.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"G:\UE427\G_Test27\Intermediate\Build\Win64\G_Test27Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"G:\UE427\G_Test27\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.cpp.obj"
+"G:\UE427\G_Test27\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
+"G:\UE427\G_Test27\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Default.rc2.res"
+/OUT:"G:\UE427\G_Test27\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\UE4Editor-PromethPlugin.lib"

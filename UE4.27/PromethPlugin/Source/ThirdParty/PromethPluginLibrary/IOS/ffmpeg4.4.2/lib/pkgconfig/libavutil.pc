@@ -1,0 +1,14 @@
+prefix=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64
+exec_prefix=${prefix}
+libdir=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64/lib
+includedir=/Volumes/Mini/ffmpeg_build/ios-ffmpeg-build-script-ilongge-4.4.2/FFmpeg/thin-4.4.2/arm64/include
+
+Name: libavutil
+Description: FFmpeg utility library
+Version: 56.70.100
+Requires: 
+Requires.private: 
+Conflicts:
+Libs: -L${libdir}  -lavutil -pthread -lm -framework VideoToolbox -framework CoreFoundation -framework CoreMedia -framework CoreVideo
+Libs.private: 
+Cflags: -I${includedir}
