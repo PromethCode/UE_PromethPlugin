@@ -6,9 +6,9 @@
 /NAME:"UE4Editor-PromethPlugin.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"G:\UE426\G_Test26\Intermediate\Build\Win64\G_Test26Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
-"G:\UE426\G_Test26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.cpp.obj"
-"G:\UE426\G_Test26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
-"G:\UE426\G_Test26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Default.rc2.res"
-/OUT:"G:\UE426\G_Test26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\UE4Editor-PromethPlugin.lib"
+"A:\UE_Projects\Test426CPP\Intermediate\Build\Win64\Test426CPPEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"A:\UE_Projects\Test426CPP\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.cpp.obj"
+"A:\UE_Projects\Test426CPP\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
+"A:\UE_Projects\Test426CPP\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Default.rc2.res"
+/OUT:"A:\UE_Projects\Test426CPP\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\UE4Editor-PromethPlugin.lib"
 /INCLUDE:IMPLEMENT_MODULE_PromethPlugin

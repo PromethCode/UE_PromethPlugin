@@ -31,11 +31,15 @@
 /wd4244
 /wd4838
 /I .
-/I G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Private
+/I E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Private
+/I ThirdParty
+/I ThirdParty\Vorbis\libvorbis-1.3.2\include
+/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AudioPlatformConfiguration
 /I Runtime
+/I Runtime\AudioPlatformConfiguration\Public
 /I Runtime\TraceLog\Public
 /I Runtime\Core\Public
-/I G:\UE426\plugin26\Plugins\PromethPlugin\Source\ThirdParty
+/I E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\ThirdParty
 /I Runtime\Projects\Public
 /I Runtime\Json\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\CoreUObject
@@ -84,8 +88,6 @@
 /I Runtime\PacketHandlers\PacketHandler\Classes
 /I Runtime\PacketHandlers\PacketHandler\Public
 /I Runtime\PacketHandlers\ReliabilityHandlerComponent\Public
-/I ..\Intermediate\Build\Win64\UE4Editor\Inc\AudioPlatformConfiguration
-/I Runtime\AudioPlatformConfiguration\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\MeshDescription
 /I Runtime\MeshDescription\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\StaticMeshDescription
@@ -104,7 +106,6 @@
 /I Runtime\Experimental\ChaosCore\Public
 /I ThirdParty\Intel
 /I Runtime\Experimental\Voronoi\Public
-/I ThirdParty
 /I Runtime\SignalProcessing\Public
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\AudioExtensions
 /I Runtime\AudioExtensions\Public
@@ -240,9 +241,10 @@
 /I ..\Intermediate\Build\Win64\UE4Editor\Inc\MoviePlayer
 /I Runtime\MoviePlayer\Public
 /I Runtime\RawMesh\Public
-/I G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin
-/I G:\UE426\plugin26\Plugins\PromethPlugin\Source
-/I G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public
+/I E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin
+/I E:\Project\PrometheusProject\Plugins\PromethPlugin\Source
+/I E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public
+/I ThirdParty\Ogg\libogg-1.2.2\include
 /I ThirdParty\PhysX3\PxShared\include
 /I ThirdParty\PhysX3\PxShared\include\cudamanager
 /I ThirdParty\PhysX3\PxShared\include\filebuf
@@ -267,17 +269,17 @@
 /I ThirdParty\PhysX3\APEX_1.4\shared\general\PairFilter\include
 /I ThirdParty\PhysX3\APEX_1.4\shared\internal\include
 /I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.1\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
-/FI"G:\UE426\plugin26\Intermediate\Build\Win64\plugin26Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Yu"G:\UE426\plugin26\Intermediate\Build\Win64\plugin26Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"G:\UE426\plugin26\Intermediate\Build\Win64\plugin26Editor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-"G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp"
-/FI"G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Definitions.PromethPlugin.h"
-/Fo"G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
+/FI"E:\Project\PrometheusProject\Intermediate\Build\Win64\PrometheusProjectEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Yu"E:\Project\PrometheusProject\Intermediate\Build\Win64\PrometheusProjectEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"E:\Project\PrometheusProject\Intermediate\Build\Win64\PrometheusProjectEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp"
+/FI"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Definitions.PromethPlugin.h"
+/Fo"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
 /TP
 /GR-
 /W4

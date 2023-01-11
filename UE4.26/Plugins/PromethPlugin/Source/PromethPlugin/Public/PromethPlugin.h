@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -20,7 +20,7 @@ public:
 #if PLATFORM_WINDOWS || PLATFORM_ANDROID
 			Ret = (T)FPlatformProcess::GetDllExport(Handle, *ProcName);
 #elif PLATFORM_IOS
-			Ret = (T)dlsym(Handle, TCHAR_TO_UTF8(ProcName.GetCharArray().GetData()));
+			Ret = (T)dlsym(MeshPlayerPluginHandle, TCHAR_TO_UTF8(ProcName.GetCharArray().GetData()));
 #endif
 			if (Ret) return Ret;
 		}

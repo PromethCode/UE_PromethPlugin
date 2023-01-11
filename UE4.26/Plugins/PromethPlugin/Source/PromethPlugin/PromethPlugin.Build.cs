@@ -7,17 +7,35 @@ public class PromethPlugin : ModuleRules
 	public PromethPlugin(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-		
-		PublicIncludePaths.AddRange(
+
+        AddEngineThirdPartyPrivateStaticDependencies(Target,
+            "UEOgg",
+            "Vorbis"
+        );
+
+        PublicDefinitions.AddRange(
+            new string[]
+            {
+                "DR_WAV_IMPLEMENTATION=1",
+                "DR_MP3_IMPLEMENTATION=1",
+                "DR_FLAC_IMPLEMENTATION=1"
+            }
+        );
+
+#if !UE_5_00_OR_LATER
+        PrivateDependencyModuleNames.Add("AudioPlatformConfiguration");
+#endif
+
+        PublicIncludePaths.AddRange(
 			new string[] {
-                "PromethPlugin/Public"
+				// ... add public include paths required here ...
 			}
 			);
 				
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-                "PromethPlugin/Private"
+				// ... add other private include paths required here ...
 			}
 			);
 			

@@ -1,0 +1,210 @@
+#include "AudioModel/ImportedSoundWave.h"
+#include "AudioModel/RuntimeAudioImporterDefines.h"
+#include "AudioDevice.h"
+#include "Async/Async.h"
+
+UImportedSoundWave::UImportedSoundWave(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+  , CurrentNumOfFrames(0)
+{
+}
+
+void UImportedSoundWave::BeginDestroy()
+{
+	UE_LOG(LogRuntimeAudioImporter, Warning, TEXT("Imported sound wave ('%s') data will be cleared because it is being unloaded"), *GetName());
+
+	Super::BeginDestroy();
+}
+
+void UImportedSoundWave::Parse(FAudioDevice* AudioDevice, const UPTRINT NodeWaveInstanceHash, FActiveSound& ActiveSound, const FSoundParseParameters& ParseParams, TArray<FWaveInstance*>& WaveInstances)
+{
+	if (ActiveSound.PlaybackTime == 0.f)
+	{
+		RewindPlaybackTime(ParseParams.StartTime);
+	}
+
+	ActiveSound.PlaybackTime = GetPlaybackTime();
+
+	if (IsPlaybackFinished())
+	{
+		UE_LOG(LogRuntimeAudioImporter, Warning, TEXT("Playback of the sound wave '%s' has been completed"), *GetName());
+
+		if (!PlaybackFinishedBroadcast)
+		{
+			PlaybackFinishedBroadcast = true;
+
+			if (OnAudioPlaybackFinishedNative.IsBound())
+			{
+				OnAudioPlaybackFinishedNative.Broadcast();
+			}
+
+			if (OnAudioPlaybackFinished.IsBound())
+			{
+				OnAudioPlaybackFinished.Broadcast();
+			}
+		}
+
+		if (!bLooping)
+		{
+			AudioDevice->StopActiveSound(&ActiveSound);
+		}
+		else
+		{
+			UE_LOG(LogRuntimeAudioImporter, Log, TEXT("The sound wave '%s' will be looped"), *GetName());
+			ActiveSound.PlaybackTime = 0.f;
+			RewindPlaybackTime(0.f);
+		}
+	}
+
+	Super::Parse(AudioDevice, NodeWaveInstanceHash, ActiveSound, ParseParams, WaveInstances);
+}
+
+void UImportedSoundWave::ReleaseMemory()
+{
+	UE_LOG(LogRuntimeAudioImporter, Warning, TEXT("Releasing memory for the sound wave '%s'"), *GetName());
+
+	PCMBufferInfo.PCMData.Empty();
+
+	PCMBufferInfo.~FPCMStruct();
+}
+
+void UImportedSoundWave::SetLooping(bool bLoop)
+{
+	bLooping = bLoop;
+}
+
+void UImportedSoundWave::SetSubtitles(const TArray<FEditableSubtitleCue>& InSubtitles)
+{
+	Subtitles.Empty();
+
+	for (const FEditableSubtitleCue& Subtitle : InSubtitles)
+	{
+		FSubtitleCue ConvertedSubtitle;
+		{
+			ConvertedSubtitle.Text = Subtitle.Text;
+			ConvertedSubtitle.Time = Subtitle.Time;
+		}
+
+		Subtitles.Add(ConvertedSubtitle);
+	}
+}
+
+void UImportedSoundWave::SetVolume(float InVolume)
+{
+	Volume = InVolume;
+}
+
+void UImportedSoundWave::SetPitch(float InPitch)
+{
+	Pitch = InPitch;
+}
+
+bool UImportedSoundWave::RewindPlaybackTime(float PlaybackTime)
+{
+	if (PlaybackTime > Duration)
+	{
+		UE_LOG(LogRuntimeAudioImporter, Warning, TEXT("Unable to rewind playback time for the imported sound wave '%s' by time '%f' because total length is '%f'"), *GetName(), PlaybackTime, Duration);
+		return false;
+	}
+
+	return ChangeCurrentFrameCount(PlaybackTime * SampleRate);
+}
+
+bool UImportedSoundWave::ChangeCurrentFrameCount(uint32 NumOfFrames)
+{
+	if (NumOfFrames < 0 || NumOfFrames > PCMBufferInfo.PCMNumOfFrames)
+	{
+		UE_LOG(LogRuntimeAudioImporter, Error, TEXT("Cannot change the current frame for the imported sound wave '%s' to frame '%d' because the total number of frames is '%d'"), *GetName(), NumOfFrames, PCMBufferInfo.PCMNumOfFrames);
+		return false;
+	}
+
+	CurrentNumOfFrames = NumOfFrames;
+
+	PlaybackFinishedBroadcast = false;
+
+	return true;
+}
+
+float UImportedSoundWave::GetPlaybackTime() const
+{
+	return static_cast<float>(CurrentNumOfFrames) / SampleRate;
+}
+
+float UImportedSoundWave::GetDurationConst() const
+{
+	return Duration;
+}
+
+float UImportedSoundWave::GetDuration()
+#if ENGINE_MAJOR_VERSION >= 5
+const
+#endif
+{
+	return GetDurationConst();
+}
+
+float UImportedSoundWave::GetPlaybackPercentage() const
+{
+	return static_cast<float>(CurrentNumOfFrames) / PCMBufferInfo.PCMNumOfFrames * 100;
+}
+
+bool UImportedSoundWave::IsPlaybackFinished()
+{
+	const bool bOutOfFrames = static_cast<uint32>(CurrentNumOfFrames) >= PCMBufferInfo.PCMNumOfFrames;
+
+	const bool bValidPCMData = PCMBufferInfo.IsValid();
+
+	return bOutOfFrames && bValidPCMData;
+}
+
+int32 UImportedSoundWave::OnGeneratePCMAudio(TArray<uint8>& OutAudio, int32 NumSamples)
+{
+	TWeakObjectPtr<UImportedSoundWave> ThisPtr(this);
+
+	if (static_cast<uint32>(CurrentNumOfFrames) >= PCMBufferInfo.PCMNumOfFrames)
+	{
+		return 0;
+	}
+
+	if (static_cast<uint32>(CurrentNumOfFrames) + static_cast<uint32>(NumSamples) / static_cast<uint32>(NumChannels) >= PCMBufferInfo.PCMNumOfFrames)
+	{
+		NumSamples = (PCMBufferInfo.PCMNumOfFrames - CurrentNumOfFrames) * NumChannels;
+	}
+
+	uint8* RetrievedPCMData = PCMBufferInfo.PCMData.GetView().GetData() + (CurrentNumOfFrames * NumChannels * sizeof(float));
+	const int32 RetrievedPCMDataSize = NumSamples * sizeof(float);
+
+	if (RetrievedPCMDataSize <= 0 || !RetrievedPCMData)
+	{
+		return 0;
+	}
+
+	OutAudio = TArray<uint8>(RetrievedPCMData, RetrievedPCMDataSize);
+
+	CurrentNumOfFrames = CurrentNumOfFrames + (NumSamples / NumChannels);
+
+	AsyncTask(ENamedThreads::GameThread, [ThisPtr, RetrievedPCMData, RetrievedPCMDataSize = NumSamples]()
+	{
+		if (!ThisPtr.IsValid())
+		{
+			return;
+		}
+
+		if (ThisPtr->OnGeneratePCMDataNative.IsBound())
+		{
+			ThisPtr->OnGeneratePCMDataNative.Broadcast(TArray<float>(reinterpret_cast<float*>(RetrievedPCMData), RetrievedPCMDataSize));
+		}
+
+		if (ThisPtr->OnGeneratePCMData.IsBound())
+		{
+			ThisPtr->OnGeneratePCMData.Broadcast(TArray<float>(reinterpret_cast<float*>(RetrievedPCMData), RetrievedPCMDataSize));
+		}
+	});
+
+	return NumSamples;
+}
+
+Audio::EAudioMixerStreamDataFormat::Type UImportedSoundWave::GetGeneratedPCMDataFormat() const
+{
+	return Audio::EAudioMixerStreamDataFormat::Type::Float;
+}

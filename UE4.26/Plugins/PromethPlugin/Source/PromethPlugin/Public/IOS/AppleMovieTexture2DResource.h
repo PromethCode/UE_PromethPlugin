@@ -16,15 +16,8 @@ public:
     FAppleMovieStreamerTexture2DResourceWrapper_My(CFTypeRef InImageBuffer)
 		: ImageBuffer(InImageBuffer)
 	{
-        if(!ImageBuffer)
-            UE_LOG(LogTemp, Warning, TEXT(" PromethPlugin : FAppleMovieStreamerTexture2DResourceWrapper_My ImageBuffer is nullptr"));
-
-        UE_LOG(LogTemp, Warning, TEXT(" PromethPlugin : FAppleMovieStreamerTexture2DResourceWrapper_My Init"));
 		check(ImageBuffer);
-        UE_LOG(LogTemp, Warning, TEXT(" PromethPlugin : FAppleMovieStreamerTexture2DResourceWrapper_My check"));
 		CFRetain(ImageBuffer);
-        UE_LOG(LogTemp, Warning, TEXT(" PromethPlugin : FAppleMovieStreamerTexture2DResourceWrapper_My CFRetain"));
-
 	}
 
 	virtual ~FAppleMovieStreamerTexture2DResourceWrapper_My()

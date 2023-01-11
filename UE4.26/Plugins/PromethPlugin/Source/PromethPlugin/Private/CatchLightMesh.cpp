@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Prometh Coporation.  All rights reserved.
+﻿// Copyright (c) 2022 Prometh Coporation.  All rights reserved.
 #include "CatchLightMesh.h"
 //#include "MeshReaderPRM.h"
 #include "PrimitiveSceneProxy.h"
@@ -23,9 +23,9 @@ class FCatchlightSceneProxy :public FPrimitiveSceneProxy
 public:
 	FCatchlightSceneProxy(UCatchlightMeshComponent* Component):
 		FPrimitiveSceneProxy(Component)
-        , isMeshEmpty(Component->IsEmpty)
 		, VertexFactory(GetScene().GetFeatureLevel(), "FCatchlightSceneProxy")
 		, MaterialRelevance(Component->GetMaterialRelevance(GetScene().GetFeatureLevel()))
+		, isMeshEmpty(Component->IsEmpty)
 	{
 		InitBuffers(Component);
 		//Material = Component->GetMaterial(0);

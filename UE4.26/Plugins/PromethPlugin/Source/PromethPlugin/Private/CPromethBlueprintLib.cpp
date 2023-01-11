@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "CPromethBlueprintLib.h"
@@ -121,15 +121,3 @@ FString UCPromethBlueprintLib::GetNewName()
 	return ResName;
 }
 
-FString UCPromethBlueprintLib::GetIOSTmpDir()
-{
-    FString Res = "";
-#if PLATFORM_IOS
-    std::string home_path = std::string([NSHomeDirectory() UTF8String]);
-    std::string target_path = home_path + "/tmp/";
-    Res = target_path.c_str();
-    UCPromethBlueprintLib::PromethDebug(Res, true, "GetIOSTmpDir", false, 20);
-
-#endif
-    return Res;
-}

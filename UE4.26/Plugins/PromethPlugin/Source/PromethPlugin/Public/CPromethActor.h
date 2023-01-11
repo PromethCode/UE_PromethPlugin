@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "AudioModel/RuntimeAudioImporterTypes.h"
 //#include "ReadPromethFun.h"
 #include"VideoPlayPlatform/IVideoPlayer.h"
 #include <string>
@@ -11,7 +12,7 @@
 #include"VideoPlayPlatform/Windows/WindowsVideoPlayer.h"
 #elif PLATFORM_ANDROID
 #include"VideoPlayPlatform/Android/AndroidVideoPlayer.h"
-#elif PLATFORM_IOS  || PLATFORM_MAC
+#elif PLATFORM_IOS || PLATFORM_MAC
 #include "VideoPlayPlatform/IOS/IOSVideoPlayer.h"
 #endif
 
@@ -67,8 +68,6 @@ public:
 		void CloseVideo();
 	UFUNCTION(BlueprintCallable, Category = "OtherFunction")
 		void ChangeMaterial(UMaterialInterface* NewMaterial);
-   
-
 
 public:
 	// 时间相关函数   ---------------------------------------------------------------------------------------------------------------
@@ -98,10 +97,13 @@ private:
 	void RHICreateMesh(FRHICommandListImmediate& RHICmdList, int Frame);
 	
 
-
-
-
-
+	// 初始化声音控制
+	void initAudio(FString AudioPath);
+	//加载返回函数
+	UFUNCTION() void OnResult(class URuntimeAudioImporterLibrary* Importer, class UImportedSoundWave* ImportedSoundWave, ETranscodingStatus Status);
+	//音频播放相关
+	void PlayAudio();
+	void PauseAudio();
 
 /****************************************************************成员变量***********************************************************************************/
 
@@ -199,6 +201,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SettingPath")
 		class UMediaSource* MediaSource;
 
+	//是否正在播放
+	bool bIsPlay = false;
+	//是否导入了音频
+	UPROPERTY(EditAnywhere, Category = "SettingPath|Audio") bool bAudioPlayState = false;
+	//音频资产
+	UPROPERTY(EditAnywhere, Category = "SettingPath|Audio", meta = (EditCondition = "bAudioPlayState", EditConditionHides)) FString AudioPath;
+
 	// SettingRendering  ---------------------------------------------------------------------------------------------------------------
 
 	// 动态材质实例 
@@ -254,30 +263,26 @@ public:
 	FTimerHandle OpenWaitHandle;
 
 	
-private:
+	private:
 
-    // 构造参数			---------------------------------------------------------------------------------------------------------------
+		// 构造参数			---------------------------------------------------------------------------------------------------------------
 
-    bool bCreating = false;
+		bool bCreating = false;
 
-    // IOS || Win10
-    class FSlateTexture2DRHIRef* pTexture;
-    TRefCountPtr<FRHITexture2D> InputTarget;
-    // Android
-    class FSlateTexture2DRHIRef* pAndroidTextureY;
-    TRefCountPtr<FRHITexture2D> AndroidInputTargetY;
-    class FSlateTexture2DRHIRef* pAndroidTextureUV;
-    TRefCountPtr<FRHITexture2D> AndroidInputTargetUV;
-    // 纹理临界及纹理data临界
-    FCriticalSection VideoTracksLoadingLock;
-    FCriticalSection VideoDataLock;
-    FCriticalSection MeshTracksLock;
+		// IOS || Win10
+		class FSlateTexture2DRHIRef* pTexture;
+		TRefCountPtr<FRHITexture2D> InputTarget;
+		// Android
+		class FSlateTexture2DRHIRef* pAndroidTextureY;
+		TRefCountPtr<FRHITexture2D> AndroidInputTargetY;
+		class FSlateTexture2DRHIRef* pAndroidTextureUV;
+		TRefCountPtr<FRHITexture2D> AndroidInputTargetUV;
+		// 纹理临界及纹理data临界
+		FCriticalSection VideoTracksLoadingLock;
+		FCriticalSection VideoDataLock;
+		FCriticalSection MeshTracksLock;
 
-#if PLATFORM_IOS
-    CVMetalTextureCacheRef MetalTextureCache;
-#endif
-    
-    // 网格构造           ---------------------------------------------------------------------------------------------------------------
+		// 网格构造           ---------------------------------------------------------------------------------------------------------------
 private:
 	MeshParam InputMeshParam;
 public:
@@ -293,6 +298,14 @@ private:
 	bool bWaitFrame0 = false;
 	bool bSeekWaiting = false;
 
+private:
+
+	//转码之后的音频文件
+	class UImportedSoundWave* AuidoSoundWave;
+	ETranscodingStatus AuidoStatus = ETranscodingStatus::AudioDoesNotExist;;
+	//实例化的播放组件
+	class UAudioComponent* LocalAuidoCom;
+
 public:
 	
 	// Static Function And Param ---------------------------------------------------------------------------------------------------------------
@@ -304,6 +317,7 @@ public:
 	static IVideoPlayer* PromethAPI;
 	static int32 CallBackConst;
 	static TMap<FString, TPair<TWeakObjectPtr<ACPromethActor>, int32>>AllPromethActor;
+
 public:
 	// TestParam
 	float aveLocation = 0;

@@ -8,6 +8,9 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class URuntimeAudioImporterLibrary;
+class UImportedSoundWave;
+enum class ETranscodingStatus : uint8;
 class UMaterialInterface;
 class UMediaSource;
 #ifdef PROMETHPLUGIN_CPromethActor_generated_h
@@ -15,7 +18,7 @@ class UMediaSource;
 #endif
 #define PROMETHPLUGIN_CPromethActor_generated_h
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_21_DELEGATE \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_22_DELEGATE \
 struct _Script_PromethPlugin_eventSeekSucceed_Parms \
 { \
 	int32 Frame; \
@@ -28,7 +31,7 @@ static inline void FSeekSucceed_DelegateWrapper(const FMulticastScriptDelegate& 
 }
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_20_DELEGATE \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_21_DELEGATE \
 struct _Script_PromethPlugin_eventOpenVideoSucceed_Parms \
 { \
 	bool Succeed; \
@@ -41,9 +44,10 @@ static inline void FOpenVideoSucceed_DelegateWrapper(const FMulticastScriptDeleg
 }
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_SPARSE_DATA
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_RPC_WRAPPERS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_SPARSE_DATA
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execOnResult); \
 	DECLARE_FUNCTION(execChangeMaterial); \
 	DECLARE_FUNCTION(execCloseVideo); \
 	DECLARE_FUNCTION(execisFinish); \
@@ -53,8 +57,9 @@ static inline void FOpenVideoSucceed_DelegateWrapper(const FMulticastScriptDeleg
 	DECLARE_FUNCTION(execOpenVideo);
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execOnResult); \
 	DECLARE_FUNCTION(execChangeMaterial); \
 	DECLARE_FUNCTION(execCloseVideo); \
 	DECLARE_FUNCTION(execisFinish); \
@@ -64,7 +69,7 @@ static inline void FOpenVideoSucceed_DelegateWrapper(const FMulticastScriptDeleg
 	DECLARE_FUNCTION(execOpenVideo);
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_INCLASS_NO_PURE_DECLS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesACPromethActor(); \
 	friend struct Z_Construct_UClass_ACPromethActor_Statics; \
@@ -73,7 +78,7 @@ public: \
 	DECLARE_SERIALIZER(ACPromethActor)
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_INCLASS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_INCLASS \
 private: \
 	static void StaticRegisterNativesACPromethActor(); \
 	friend struct Z_Construct_UClass_ACPromethActor_Statics; \
@@ -82,7 +87,7 @@ public: \
 	DECLARE_SERIALIZER(ACPromethActor)
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_STANDARD_CONSTRUCTORS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API ACPromethActor(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(ACPromethActor) \
@@ -95,7 +100,7 @@ private: \
 public:
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_ENHANCED_CONSTRUCTORS \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API ACPromethActor(ACPromethActor&&); \
@@ -106,28 +111,28 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(ACPromethActor); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(ACPromethActor)
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_PRIVATE_PROPERTY_OFFSET
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_23_PROLOG
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_GENERATED_BODY_LEGACY \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_PRIVATE_PROPERTY_OFFSET
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_24_PROLOG
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_PRIVATE_PROPERTY_OFFSET \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_SPARSE_DATA \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_RPC_WRAPPERS \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_INCLASS \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_STANDARD_CONSTRUCTORS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_PRIVATE_PROPERTY_OFFSET \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_SPARSE_DATA \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_RPC_WRAPPERS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_INCLASS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_GENERATED_BODY \
+#define PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_PRIVATE_PROPERTY_OFFSET \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_SPARSE_DATA \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_RPC_WRAPPERS_NO_PURE_DECLS \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_INCLASS_NO_PURE_DECLS \
-	plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_26_ENHANCED_CONSTRUCTORS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_PRIVATE_PROPERTY_OFFSET \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_SPARSE_DATA \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_RPC_WRAPPERS_NO_PURE_DECLS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_INCLASS_NO_PURE_DECLS \
+	PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h_27_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -135,7 +140,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> PROMETHPLUGIN_API UClass* StaticClass<class ACPromethActor>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID plugin26_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h
+#define CURRENT_FILE_ID PrometheusProject_Plugins_PromethPlugin_Source_PromethPlugin_Public_CPromethActor_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

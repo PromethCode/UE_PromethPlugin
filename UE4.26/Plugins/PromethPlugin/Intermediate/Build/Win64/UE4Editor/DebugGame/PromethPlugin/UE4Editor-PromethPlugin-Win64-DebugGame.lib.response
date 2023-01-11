@@ -1,0 +1,14 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UE4Editor-PromethPlugin-Win64-DebugGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Project\PrometheusProject\Intermediate\Build\Win64\PrometheusProjectEditor\DebugGame\Engine\SharedPCH.Engine.NonOptimized.ShadowErrors.h.obj"
+"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\DebugGame\PromethPlugin\Module.PromethPlugin.cpp.obj"
+"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\DebugGame\PromethPlugin\Module.PromethPlugin.gen.cpp.obj"
+"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\DebugGame\PromethPlugin\Default.rc2.res"
+/OUT:"E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\DebugGame\PromethPlugin\UE4Editor-PromethPlugin-Win64-DebugGame.lib"
+/INCLUDE:IMPLEMENT_MODULE_PromethPlugin

@@ -43,9 +43,9 @@ extern "C"{
     
     // 根据帧索引获取纹理数据
     PLUGIN_EXPORT_API TextureDescriptor textureDataAtIndex(const char* decoderID, unsigned int index);
-    PLUGIN_EXPORT_API UE418TextureDescriptor UE418_TextureDataAtIndex(const char* sessionID, unsigned int index);
     
-    PLUGIN_EXPORT_API void xdbgLog(const char* log);
+    
+    PLUGIN_EXPORT_API void dbgLog(const char* log);
    
 
     PLUGIN_EXPORT_API const char *getDebugVideoFileName(void);

@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "PromethPlugin.h"
 #include "Core.h"
@@ -45,7 +45,7 @@ void FPromethPluginModule::ImportDLL(const FString& FilePath) {
 	{
 		UE_LOG(LogTemp, Display, TEXT("[Prometh] import so dll dylb %s no exist!"), *FilePath);
 	}
-	void* Handle = nullptr;
+	void* Handle;
 #if PLATFORM_WINDOWS
 	Handle = !FilePath.IsEmpty() ? FPlatformProcess::GetDllHandle(*FilePath) : nullptr;
 #elif PLATFORM_ANDROID
@@ -67,3 +67,5 @@ void FPromethPluginModule::ImportDLL(const FString& FilePath) {
 #undef LOCTEXT_NAMESPACE
 	
 IMPLEMENT_MODULE(FPromethPluginModule, PromethPlugin)
+
+DEFINE_LOG_CATEGORY(LogRuntimeAudioImporter);

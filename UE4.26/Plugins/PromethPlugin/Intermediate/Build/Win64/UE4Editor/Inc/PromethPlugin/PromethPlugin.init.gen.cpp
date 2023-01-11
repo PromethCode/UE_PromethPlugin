@@ -11,6 +11,15 @@
 #endif
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodePromethPlugin_init() {}
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnAudioPlaybackFinished__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnGeneratePCMData__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnSoundWaveCompressedResult__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnAudioImporterProgress__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnAudioImporterResult__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnAudioExportToBufferResult__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnAudioExportToFileResult__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnRAWDataTranscodeFromBufferResult__DelegateSignature();
+	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnRAWDataTranscodeFromFileResult__DelegateSignature();
 	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OpenVideoSucceed__DelegateSignature();
 	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_SeekSucceed__DelegateSignature();
 	PROMETHPLUGIN_API UFunction* Z_Construct_UDelegateFunction_PromethPlugin_OnFilesDownloaderProgress__DelegateSignature();
@@ -21,6 +30,15 @@ void EmptyLinkFunctionForGeneratedCodePromethPlugin_init() {}
 		if (!ReturnPackage)
 		{
 			static UObject* (*const SingletonFuncArray[])() = {
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnAudioPlaybackFinished__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnGeneratePCMData__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnSoundWaveCompressedResult__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnAudioImporterProgress__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnAudioImporterResult__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnAudioExportToBufferResult__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnAudioExportToFileResult__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnRAWDataTranscodeFromBufferResult__DelegateSignature,
+				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnRAWDataTranscodeFromFileResult__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OpenVideoSucceed__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_SeekSucceed__DelegateSignature,
 				(UObject* (*)())Z_Construct_UDelegateFunction_PromethPlugin_OnFilesDownloaderProgress__DelegateSignature,
@@ -31,8 +49,8 @@ void EmptyLinkFunctionForGeneratedCodePromethPlugin_init() {}
 				SingletonFuncArray,
 				UE_ARRAY_COUNT(SingletonFuncArray),
 				PKG_CompiledIn | 0x00000000,
-				0x5C6212A2,
-				0xDA472557,
+				0x36FC4FAE,
+				0xFE8C2522,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UE4CodeGen_Private::ConstructUPackage(ReturnPackage, PackageParams);

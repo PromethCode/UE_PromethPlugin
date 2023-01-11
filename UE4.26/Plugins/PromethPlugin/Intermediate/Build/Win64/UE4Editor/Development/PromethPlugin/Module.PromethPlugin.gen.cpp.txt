@@ -1,14 +1,17 @@
-G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Definitions.PromethPlugin.h
-G:/UE426/plugin26/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CatchLightMesh.gen.cpp
-E:\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
-E:\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin/Public/CatchLightMesh.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CatchLightMesh.generated.h
-G:/UE426/plugin26/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CPromethActor.gen.cpp
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin/Public/CPromethActor.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform/IVideoPlayer.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethBlueprintLib.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CPromethBlueprintLib.generated.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Development\PromethPlugin\Definitions.PromethPlugin.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CatchLightMesh.gen.cpp
+D:\Engine\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/GeneratedCppIncludes.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\CoreUObject\Public\UObject/MetaData.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/CatchLightMesh.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CatchLightMesh.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CPromethActor.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/CPromethActor.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel/RuntimeAudioImporterTypes.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel/RuntimeAudioImporterDefines.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\RuntimeAudioImporterTypes.generated.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform/IVideoPlayer.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethBlueprintLib.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CPromethBlueprintLib.generated.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\string
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\xstring
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\iosfwd
@@ -21,24 +24,41 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\xutility
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\utility
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\cctype
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform/Windows/WindowsVideoPlayer.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform\Windows\../mesh_decoder_types.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform/Windows/WindowsVideoPlayer.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform\Windows\../mesh_decoder_types.h
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE\vector
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform\Windows\../texture_decoder_types.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\PromethPlugin.h
-E:\UE_4.26\Engine\Source\Runtime\Engine\Public\Slate/SlateTextures.h
-E:\UE_4.26\Engine\Source\Runtime\SlateCore\Public\Textures/SlateUpdatableTexture.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CPromethActor.generated.h
-G:/UE426/plugin26/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CPromethBlueprintLib.gen.cpp
-G:/UE426/plugin26/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/PromethPlugin.init.gen.cpp
-G:/UE426/plugin26/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/RuntimeFilesDownloaderLibrary.gen.cpp
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin/Public/RuntimeFilesDownloaderLibrary.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Http.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\HttpModule.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpRequest.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpBase.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpResponse.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\PlatformHttp.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Windows/WindowsPlatformHttp.h
-E:\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\GenericPlatform/GenericPlatformHttp.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\RuntimeFilesDownloaderLibrary.generated.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\VideoPlayPlatform\Windows\../texture_decoder_types.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\PromethPlugin.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Engine\Public\Slate/SlateTextures.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\SlateCore\Public\Textures/SlateUpdatableTexture.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\CPromethActor.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/CPromethBlueprintLib.gen.cpp
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/ImportedSoundWave.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/AudioModel/ImportedSoundWave.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Engine\Classes\Sound/SoundWaveProcedural.h
+D:\Engine\UE_4.26\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\SoundWaveProcedural.generated.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\ImportedSoundWave.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/PreimportedSoundAsset.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/AudioModel/PreimportedSoundAsset.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\PreImportedSoundAsset.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/PromethPlugin.init.gen.cpp
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/RuntimeAudioCompressor.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/AudioModel/RuntimeAudioCompressor.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\RuntimeAudioCompressor.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/RuntimeAudioImporterLibrary.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/AudioModel/RuntimeAudioImporterLibrary.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\RuntimeAudioImporterLibrary.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/RuntimeAudioImporterTypes.gen.cpp
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/RuntimeFilesDownloaderLibrary.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Public/RuntimeFilesDownloaderLibrary.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Http.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\HttpModule.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpRequest.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpBase.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Interfaces/IHttpResponse.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\PlatformHttp.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\Windows/WindowsPlatformHttp.h
+D:\Engine\UE_4.26\Engine\Source\Runtime\Online\HTTP\Public\GenericPlatform/GenericPlatformHttp.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Intermediate\Build\Win64\UE4Editor\Inc\PromethPlugin\RuntimeFilesDownloaderLibrary.generated.h
+E:/Project/PrometheusProject/Plugins/PromethPlugin/Intermediate/Build/Win64/UE4Editor/Inc/PromethPlugin/WAVTranscoder.gen.cpp
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin/Private/AudioModel/Transcoders/WAVTranscoder.h

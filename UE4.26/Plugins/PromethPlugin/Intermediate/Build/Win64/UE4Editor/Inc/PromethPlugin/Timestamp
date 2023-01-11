@@ -1,4 +1,10 @@
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\CatchLightMesh.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethBlueprintLib.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\RuntimeFilesDownloaderLibrary.h
-G:\UE426\plugin26\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethActor.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel\PreimportedSoundAsset.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel\ImportedSoundWave.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel\RuntimeAudioCompressor.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel\RuntimeAudioImporterTypes.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\CatchLightMesh.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\AudioModel\RuntimeAudioImporterLibrary.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethActor.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\CPromethBlueprintLib.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Public\RuntimeFilesDownloaderLibrary.h
+E:\Project\PrometheusProject\Plugins\PromethPlugin\Source\PromethPlugin\Private\AudioModel\Transcoders\WAVTranscoder.h

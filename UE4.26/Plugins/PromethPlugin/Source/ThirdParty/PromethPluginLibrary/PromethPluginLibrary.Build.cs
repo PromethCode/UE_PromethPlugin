@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 using System.IO;
 using UnrealBuildTool;
@@ -80,55 +80,6 @@ public class PromethPluginLibrary : ModuleRules
             string IOSThridPartyPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "IOS"));
             PrivateIncludePaths.Add(IOSThridPartyPath);
 
-            
-
-
-            
-            List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg_ios_arm64", "lib"), ".a");
-            
-            PrivateIncludePaths.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_ios_arm64", "include"));
-            //List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg"), ".a");
-            Console.WriteLine("------------ffmpeg------------");
-            foreach (string file in IOSFiles)
-            {
-                Console.WriteLine(file);
-                PublicAdditionalLibraries.Add(file);
-            }
-            
-            
-            //List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib"), ".a");
-            /*
-            PrivateIncludePaths.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "include"));
-            //List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg"), ".a");
-            Console.WriteLine("------------ffmpeg------------");
-            foreach (string file in IOSFiles)
-            {
-                Console.WriteLine(file);
-                PublicAdditionalLibraries.Add(file);
-            }
-            */
-            /*********ffmpeg new*********/
-            /*
-            PrivateIncludePaths.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "include"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libavcodec.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libavdevice.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libavfilter.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libavformat.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libavutil.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libswresample.a"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_new", "lib", "libswscale.a"));
-             */
-            
-            /*********ffmpeg new*********/
-
-            IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "draco"), ".a");
-            Console.WriteLine("------------draco------------");
-            foreach (string file in IOSFiles)
-            {
-                Console.WriteLine(file);
-                PublicAdditionalLibraries.Add(file);
-            }
-
             // Array Add .a
             Console.WriteLine("------------Array Add .a------------");
             PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libYYCategories.a"));
@@ -138,12 +89,32 @@ public class PromethPluginLibrary : ModuleRules
             PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libAuthorization.a"));
             PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libapple_mesh_decoder_plugin.a"));
             PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libapple_decoder_plugin.a"));
-            
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libz.1.tbd"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libc++.1.tbd"));
-            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libbz2.1.0.tbd"));
+
+            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libxml2.a"));
             PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libiconv.2.tbd"));
-            
+            PublicAdditionalLibraries.Add(Path.Combine(IOSThridPartyPath, "libbz2.1.0.tbd"));
+
+
+
+            List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg_ios_arm64", "lib"), ".a");
+            PrivateIncludePaths.Add(Path.Combine(IOSThridPartyPath, "ffmpeg_ios_arm64", "include"));
+            //List<string> IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "ffmpeg"), ".a");
+            Console.WriteLine("------------ffmpeg------------");
+            foreach (string file in IOSFiles)
+            {
+                Console.WriteLine(file);
+                PublicAdditionalLibraries.Add(file);
+            }
+
+            IOSFiles = LoadFile(Path.Combine(IOSThridPartyPath, "draco"), ".a");
+            Console.WriteLine("------------draco------------");
+            foreach (string file in IOSFiles)
+            {
+                Console.WriteLine(file);
+                PublicAdditionalLibraries.Add(file);
+            }
+
+
             PublicFrameworks.AddRange(
                 new string[]
                 {
@@ -157,9 +128,9 @@ public class PromethPluginLibrary : ModuleRules
             );
 
             /****************************************************/
-            //PublicAdditionalLibraries.Add("z");
-            //PublicAdditionalLibraries.Add("sqlite3.0");
-            //PublicAdditionalLibraries.Add("c++");
+            PublicAdditionalLibraries.Add("z");
+            PublicAdditionalLibraries.Add("sqlite3.0");
+            PublicAdditionalLibraries.Add("c++");
             /****************************************************/
         }
         else if (Target.Platform == UnrealTargetPlatform.Android)

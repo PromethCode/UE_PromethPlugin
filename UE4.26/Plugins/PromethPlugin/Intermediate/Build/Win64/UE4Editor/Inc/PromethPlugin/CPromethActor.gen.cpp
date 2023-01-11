@@ -20,6 +20,9 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 	PROMETHPLUGIN_API UClass* Z_Construct_UClass_ACPromethActor();
 	ENGINE_API UClass* Z_Construct_UClass_AActor();
 	ENGINE_API UClass* Z_Construct_UClass_UMaterialInterface_NoRegister();
+	PROMETHPLUGIN_API UClass* Z_Construct_UClass_URuntimeAudioImporterLibrary_NoRegister();
+	PROMETHPLUGIN_API UClass* Z_Construct_UClass_UImportedSoundWave_NoRegister();
+	PROMETHPLUGIN_API UEnum* Z_Construct_UEnum_PromethPlugin_ETranscodingStatus();
 	MEDIAASSETS_API UClass* Z_Construct_UClass_UMediaSource_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UTexture2D_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
@@ -95,6 +98,16 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 		}
 		return ReturnFunction;
 	}
+	DEFINE_FUNCTION(ACPromethActor::execOnResult)
+	{
+		P_GET_OBJECT(URuntimeAudioImporterLibrary,Z_Param_Importer);
+		P_GET_OBJECT(UImportedSoundWave,Z_Param_ImportedSoundWave);
+		P_GET_ENUM(ETranscodingStatus,Z_Param_Status);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnResult(Z_Param_Importer,Z_Param_ImportedSoundWave,ETranscodingStatus(Z_Param_Status));
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(ACPromethActor::execChangeMaterial)
 	{
 		P_GET_OBJECT(UMaterialInterface,Z_Param_NewMaterial);
@@ -158,6 +171,7 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 			{ "ChangeMaterial", &ACPromethActor::execChangeMaterial },
 			{ "CloseVideo", &ACPromethActor::execCloseVideo },
 			{ "isFinish", &ACPromethActor::execisFinish },
+			{ "OnResult", &ACPromethActor::execOnResult },
 			{ "OpenVideo", &ACPromethActor::execOpenVideo },
 			{ "Pause", &ACPromethActor::execPause },
 			{ "Play", &ACPromethActor::execPlay },
@@ -258,6 +272,51 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 		if (!ReturnFunction)
 		{
 			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ACPromethActor_isFinish_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_ACPromethActor_OnResult_Statics
+	{
+		struct CPromethActor_eventOnResult_Parms
+		{
+			URuntimeAudioImporterLibrary* Importer;
+			UImportedSoundWave* ImportedSoundWave;
+			ETranscodingStatus Status;
+		};
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_Importer;
+		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_ImportedSoundWave;
+		static const UE4CodeGen_Private::FBytePropertyParams NewProp_Status_Underlying;
+		static const UE4CodeGen_Private::FEnumPropertyParams NewProp_Status;
+		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UE4CodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Importer = { "Importer", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(CPromethActor_eventOnResult_Parms, Importer), Z_Construct_UClass_URuntimeAudioImporterLibrary_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_ImportedSoundWave = { "ImportedSoundWave", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(CPromethActor_eventOnResult_Parms, ImportedSoundWave), Z_Construct_UClass_UImportedSoundWave_NoRegister, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FBytePropertyParams Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Status_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UE4CodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, 1, 0, nullptr, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Status = { "Status", nullptr, (EPropertyFlags)0x0010000000000080, UE4CodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(CPromethActor_eventOnResult_Parms, Status), Z_Construct_UEnum_PromethPlugin_ETranscodingStatus, METADATA_PARAMS(nullptr, 0) };
+	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_ACPromethActor_OnResult_Statics::PropPointers[] = {
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Importer,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_ImportedSoundWave,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Status_Underlying,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_ACPromethActor_OnResult_Statics::NewProp_Status,
+	};
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ACPromethActor_OnResult_Statics::Function_MetaDataParams[] = {
+		{ "Comment", "//\xe5\x8a\xa0\xe8\xbd\xbd\xe8\xbf\x94\xe5\x9b\x9e\xe5\x87\xbd\xe6\x95\xb0\n" },
+		{ "ModuleRelativePath", "Public/CPromethActor.h" },
+		{ "ToolTip", "\xe5\x8a\xa0\xe8\xbd\xbd\xe8\xbf\x94\xe5\x9b\x9e\xe5\x87\xbd\xe6\x95\xb0" },
+	};
+#endif
+	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_ACPromethActor_OnResult_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ACPromethActor, nullptr, "OnResult", nullptr, nullptr, sizeof(CPromethActor_eventOnResult_Parms), Z_Construct_UFunction_ACPromethActor_OnResult_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ACPromethActor_OnResult_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00040401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_ACPromethActor_OnResult_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_ACPromethActor_OnResult_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_ACPromethActor_OnResult()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_ACPromethActor_OnResult_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -577,6 +636,15 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MediaSource;
 #if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_bAudioPlayState_MetaData[];
+#endif
+		static void NewProp_bAudioPlayState_SetBit(void* Obj);
+		static const UE4CodeGen_Private::FBoolPropertyParams NewProp_bAudioPlayState;
+#if WITH_METADATA
+		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_AudioPath_MetaData[];
+#endif
+		static const UE4CodeGen_Private::FStrPropertyParams NewProp_AudioPath;
+#if WITH_METADATA
 		static const UE4CodeGen_Private::FMetaDataPairParam NewProp_MaterialInst_MetaData[];
 #endif
 		static const UE4CodeGen_Private::FObjectPropertyParams NewProp_MaterialInst;
@@ -620,6 +688,7 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 		{ &Z_Construct_UFunction_ACPromethActor_ChangeMaterial, "ChangeMaterial" }, // 2628223748
 		{ &Z_Construct_UFunction_ACPromethActor_CloseVideo, "CloseVideo" }, // 2378726727
 		{ &Z_Construct_UFunction_ACPromethActor_isFinish, "isFinish" }, // 2619829183
+		{ &Z_Construct_UFunction_ACPromethActor_OnResult, "OnResult" }, // 490691370
 		{ &Z_Construct_UFunction_ACPromethActor_OpenVideo, "OpenVideo" }, // 1001016906
 		{ &Z_Construct_UFunction_ACPromethActor_Pause, "Pause" }, // 2658575319
 		{ &Z_Construct_UFunction_ACPromethActor_Play, "Play" }, // 2501890212
@@ -932,6 +1001,30 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 #endif
 	const UE4CodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ACPromethActor_Statics::NewProp_MediaSource = { "MediaSource", nullptr, (EPropertyFlags)0x0010000000000005, UE4CodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ACPromethActor, MediaSource), Z_Construct_UClass_UMediaSource_NoRegister, METADATA_PARAMS(Z_Construct_UClass_ACPromethActor_Statics::NewProp_MediaSource_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ACPromethActor_Statics::NewProp_MediaSource_MetaData)) };
 #if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState_MetaData[] = {
+		{ "Category", "SettingPath|Audio" },
+		{ "Comment", "//\xe6\x98\xaf\xe5\x90\xa6\xe5\xaf\xbc\xe5\x85\xa5\xe4\xba\x86\xe9\x9f\xb3\xe9\xa2\x91\n" },
+		{ "ModuleRelativePath", "Public/CPromethActor.h" },
+		{ "ToolTip", "\xe6\x98\xaf\xe5\x90\xa6\xe5\xaf\xbc\xe5\x85\xa5\xe4\xba\x86\xe9\x9f\xb3\xe9\xa2\x91" },
+	};
+#endif
+	void Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState_SetBit(void* Obj)
+	{
+		((ACPromethActor*)Obj)->bAudioPlayState = 1;
+	}
+	const UE4CodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState = { "bAudioPlayState", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Bool | UE4CodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, 1, sizeof(bool), sizeof(ACPromethActor), &Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState_SetBit, METADATA_PARAMS(Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState_MetaData)) };
+#if WITH_METADATA
+	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACPromethActor_Statics::NewProp_AudioPath_MetaData[] = {
+		{ "Category", "SettingPath|Audio" },
+		{ "Comment", "//\xe9\x9f\xb3\xe9\xa2\x91\xe8\xb5\x84\xe4\xba\xa7\n" },
+		{ "EditCondition", "bAudioPlayState" },
+		{ "EditConditionHides", "" },
+		{ "ModuleRelativePath", "Public/CPromethActor.h" },
+		{ "ToolTip", "\xe9\x9f\xb3\xe9\xa2\x91\xe8\xb5\x84\xe4\xba\xa7" },
+	};
+#endif
+	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UClass_ACPromethActor_Statics::NewProp_AudioPath = { "AudioPath", nullptr, (EPropertyFlags)0x0010000000000001, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(ACPromethActor, AudioPath), METADATA_PARAMS(Z_Construct_UClass_ACPromethActor_Statics::NewProp_AudioPath_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_ACPromethActor_Statics::NewProp_AudioPath_MetaData)) };
+#if WITH_METADATA
 	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACPromethActor_Statics::NewProp_MaterialInst_MetaData[] = {
 		{ "Category", "SettingRendering" },
 		{ "Comment", "// \xe5\x8a\xa8\xe6\x80\x81\xe6\x9d\x90\xe8\xb4\xa8\xe5\xae\x9e\xe4\xbe\x8b \n" },
@@ -1030,6 +1123,8 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_bIsPathOpen,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_VideoPath,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_MediaSource,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_bAudioPlayState,
+		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_AudioPath,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_MaterialInst,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_WinMaterial,
 		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACPromethActor_Statics::NewProp_IOSMaterial,
@@ -1066,7 +1161,7 @@ void EmptyLinkFunctionForGeneratedCodeCPromethActor() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(ACPromethActor, 1626933601);
+	IMPLEMENT_CLASS(ACPromethActor, 4138449069);
 	template<> PROMETHPLUGIN_API UClass* StaticClass<ACPromethActor>()
 	{
 		return ACPromethActor::StaticClass();

@@ -87,13 +87,6 @@ void EmptyLinkFunctionForGeneratedCodeCPromethBlueprintLib() {}
 		}
 		return ReturnEnum;
 	}
-	DEFINE_FUNCTION(UCPromethBlueprintLib::execGetIOSTmpDir)
-	{
-		P_FINISH;
-		P_NATIVE_BEGIN;
-		*(FString*)Z_Param__Result=UCPromethBlueprintLib::GetIOSTmpDir();
-		P_NATIVE_END;
-	}
 	DEFINE_FUNCTION(UCPromethBlueprintLib::execStaticGetPlatform)
 	{
 		P_FINISH;
@@ -137,46 +130,12 @@ void EmptyLinkFunctionForGeneratedCodeCPromethBlueprintLib() {}
 	{
 		UClass* Class = UCPromethBlueprintLib::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
-			{ "GetIOSTmpDir", &UCPromethBlueprintLib::execGetIOSTmpDir },
 			{ "PromethDebug", &UCPromethBlueprintLib::execPromethDebug },
 			{ "SaveTXT", &UCPromethBlueprintLib::execSaveTXT },
 			{ "ScanDirectory", &UCPromethBlueprintLib::execScanDirectory },
 			{ "StaticGetPlatform", &UCPromethBlueprintLib::execStaticGetPlatform },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
-	}
-	struct Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics
-	{
-		struct CPromethBlueprintLib_eventGetIOSTmpDir_Parms
-		{
-			FString ReturnValue;
-		};
-		static const UE4CodeGen_Private::FStrPropertyParams NewProp_ReturnValue;
-		static const UE4CodeGen_Private::FPropertyParamsBase* const PropPointers[];
-#if WITH_METADATA
-		static const UE4CodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
-#endif
-		static const UE4CodeGen_Private::FFunctionParams FuncParams;
-	};
-	const UE4CodeGen_Private::FStrPropertyParams Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UE4CodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(CPromethBlueprintLib_eventGetIOSTmpDir_Parms, ReturnValue), METADATA_PARAMS(nullptr, 0) };
-	const UE4CodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::PropPointers[] = {
-		(const UE4CodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::NewProp_ReturnValue,
-	};
-#if WITH_METADATA
-	const UE4CodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::Function_MetaDataParams[] = {
-		{ "Category", "PromethStaticFun" },
-		{ "ModuleRelativePath", "Public/CPromethBlueprintLib.h" },
-	};
-#endif
-	const UE4CodeGen_Private::FFunctionParams Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UCPromethBlueprintLib, nullptr, "GetIOSTmpDir", nullptr, nullptr, sizeof(CPromethBlueprintLib_eventGetIOSTmpDir_Parms), Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x14022401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::Function_MetaDataParams)) };
-	UFunction* Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir()
-	{
-		static UFunction* ReturnFunction = nullptr;
-		if (!ReturnFunction)
-		{
-			UE4CodeGen_Private::ConstructUFunction(ReturnFunction, Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir_Statics::FuncParams);
-		}
-		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_UCPromethBlueprintLib_PromethDebug_Statics
 	{
@@ -406,7 +365,6 @@ void EmptyLinkFunctionForGeneratedCodeCPromethBlueprintLib() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_PromethPlugin,
 	};
 	const FClassFunctionLinkInfo Z_Construct_UClass_UCPromethBlueprintLib_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_UCPromethBlueprintLib_GetIOSTmpDir, "GetIOSTmpDir" }, // 1186647248
 		{ &Z_Construct_UFunction_UCPromethBlueprintLib_PromethDebug, "PromethDebug" }, // 6982019
 		{ &Z_Construct_UFunction_UCPromethBlueprintLib_SaveTXT, "SaveTXT" }, // 3094207846
 		{ &Z_Construct_UFunction_UCPromethBlueprintLib_ScanDirectory, "ScanDirectory" }, // 3889767347
@@ -445,7 +403,7 @@ void EmptyLinkFunctionForGeneratedCodeCPromethBlueprintLib() {}
 		}
 		return OuterClass;
 	}
-	IMPLEMENT_CLASS(UCPromethBlueprintLib, 4113982688);
+	IMPLEMENT_CLASS(UCPromethBlueprintLib, 1968333969);
 	template<> PROMETHPLUGIN_API UClass* StaticClass<UCPromethBlueprintLib>()
 	{
 		return UCPromethBlueprintLib::StaticClass();

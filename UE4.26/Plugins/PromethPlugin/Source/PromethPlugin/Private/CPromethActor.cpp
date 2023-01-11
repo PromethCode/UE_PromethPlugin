@@ -33,6 +33,10 @@
 #include "HAL/FileManagerGeneric.h"
 #include <string>
 
+//----------- Audio
+#include "AudioModel/RuntimeAudioImporterLibrary.h"
+#include "Components/AudioComponent.h"
+
 #if PLATFORM_IOS
 #include "IOS/AppleMovieTexture2DResource.h"
 #import <AVFoundation/AVFoundation.h>
@@ -57,7 +61,7 @@ if(!PromethAPI){
 	ACPromethActor::PromethAPI = (IVideoPlayer*)(new WindowsVideoPlayer);
 #elif PLATFORM_ANDROID
 	ACPromethActor::PromethAPI = (IVideoPlayer*)(new AndroidVideoPlayer);
-#elif PLATFORM_IOS //|| PLATFORM_MAC
+#elif PLATFORM_IOS || PLATFORM_MAC
 	ACPromethActor::PromethAPI = (IVideoPlayer*)(new IOSVideoPlayer);
 #endif
 }
@@ -139,6 +143,8 @@ void ACPromethActor::BeginPlay()
 
 	Super::BeginPlay();
 
+	//初始化音频
+	initAudio(AudioPath);
 }
 
 void ACPromethActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
@@ -192,10 +198,9 @@ void ACPromethActor::TestFun()
 
 void ACPromethActor::OpenVideoCompletionFun(bool Succeed, FString ID)
 {
-    UCPromethBlueprintLib::PromethDebug("Start OpenVideoCompletionFun !", this->bDebugLog, "OpenVideoCompletionFun");
+	
 	if(!Succeed){
 		UCPromethBlueprintLib::PromethDebug("OpenFailure!!!!!!!!!", this->bDebugLog, "OpenVideoCompletionFun", false, 20.f, FColor::Red);
-		this->bOpening = false;
 		return;
 	}
 	this->VideoID = ID;
@@ -213,18 +218,17 @@ void ACPromethActor::OpenVideoCompletionFun(bool Succeed, FString ID)
 #elif PLATFORM_ANDROID
 	initTexture(&this->AndroidTexture2DY, this->VideoWidth, this->VideoHeight, PF_R8);
 	initTexture(&this->AndroidTexture2DUV, this->VideoWidth / 2, this->VideoHeight / 2, PF_R8G8);
-#elif PLATFORM_IOS
-    initTexture(&this->VideoTexture2D, this->VideoWidth, this->VideoHeight, PF_B8G8R8A8);
-
 #endif
 
 	// 设置网格材质
 	if (this->OpenMesh) this->Mesh->SetMaterial(0, this->MaterialInst);
 
 
-
+#if PLATFORM_ANDROID
+	// AndroidDebug
 	UCPromethBlueprintLib::PromethDebug("InitSucceed", this->bDebugLog, "OpenVideoCompletionFun", false);
-
+	//return;
+#endif
 
 	// 初始化播放参数  主要是为Play()函数
 	this->PlayingTime = 0;
@@ -270,36 +274,18 @@ bool ACPromethActor::OpenVideo(const FString& Path_, UMediaSource* InMediaSource
 	/**************************TestPathEnd*****************************/
 	//PathToAndroidPaths()
 	// 获取文件路径
-#if PLATFORM_WINDOWS
 	this->VideoPath = InbIsPathOpen ? Path_ : InMediaSource->GetUrl().RightChop(7);
-#elif PLATFORM_IOS || PLATFORM_MAC
-    //this->VideoPath = IOSFileName;
-    this->VideoPath = Path_;
-
-#elif PLATFORM_ANDROID
-    this->VideoPath = Path_;
-#endif
-    if (this->VideoPath.IsEmpty()){
-        UCPromethBlueprintLib::PromethDebug("The Path is Empty!!!!!!!!!!!", bDebugLog, "OpenVideo", false, 20, FColor::Red);
-		this->bOpening = false;
+	if (this->VideoPath.IsEmpty())
 		return false;
-    }
-    FString OpenStr;
+	FString OpenStr;
+
 #if PLATFORM_WINDOWS
 	if (this->VideoPath[0] == '.')
 		OpenStr = FPaths::ProjectContentDir() + this->VideoPath.RightChop(2);
 	else
 		OpenStr = this->VideoPath;
 
-#elif PLATFORM_IOS || PLATFORM_MAC
-    /*
-    std::string home_path = std::string([NSHomeDirectory() UTF8String]);
-    std::string target_path = home_path + "/tmp/" + TCHAR_TO_UTF8(*IOSFileName) + ".mp4";
-    OpenStr = target_path.c_str();
-    UCPromethBlueprintLib::PromethDebug(OpenStr, bDebugLog, "OpenVideo", false, 20);
-    UCPromethBlueprintLib::PromethDebug((FFileManagerGeneric::Get().FileExists(*OpenStr) ? "Video is  valid ! " : "Video is not valid ! ") + OpenStr, bDebugLog, "OpenVideo", false, 20);
-     */
-    OpenStr = this->VideoPath;
+#elif PLATFORM_IOS
 
 #elif PLATFORM_ANDROID
 	OpenStr = this->VideoPath;
@@ -319,7 +305,6 @@ bool ACPromethActor::OpenVideo(const FString& Path_, UMediaSource* InMediaSource
 	if (!FFileManagerGeneric::Get().FileExists(*OpenStr)) {
 		UCPromethBlueprintLib::PromethDebug("Video is not valid ! " + OpenStr, bDebugLog, "OpenVideo", false, 20);
 		this->OpenVideoCompletion.Broadcast(false);
-		this->bOpening = false;
 		return false;
 	}
 #endif
@@ -335,6 +320,15 @@ bool ACPromethActor::OpenVideo(const FString& Path_, UMediaSource* InMediaSource
 
 void ACPromethActor::Play()
 {
+	bIsPlay = true;
+
+	//导入了音频 但是音频加载失败(因为音频加载比较慢，视频等一下音频)
+	if (bAudioPlayState && AuidoStatus != ETranscodingStatus::SuccessfulImport)
+	{
+		UCPromethBlueprintLib::PromethDebug("Audio load error! ", bDebugLog, "Audio", false);
+		return;
+	}
+
 	if (!this->bOpened) { //判断是否已打开视频
 		UCPromethBlueprintLib::PromethDebug("Playback failed because the video is not open ! ", bDebugLog, "Play", false);
 		return;
@@ -353,7 +347,11 @@ void ACPromethActor::Play()
 	this->UpdateTime = this->GetTime();
 
 	// 判断是否为异步play  bNonAsynPlay为true则在Tick上执行
-	if(this->bNonAsynPlay) return;
+	if (this->bNonAsynPlay)
+	{
+		PlayAudio();
+		return;
+	}
 
 	FString PlayThread = LAMBDAThread::CreateObjectThread([=]() {
 	LoopPlayStart:
@@ -407,11 +405,16 @@ void ACPromethActor::Play()
 		else this->bPlaying = false;
 		});
 	LAMBDAThread::WakeUpThread(PlayThread);
+
+	PlayAudio();
 }
 
 void ACPromethActor::Pause()
 {
 	this->bPlaying = false;
+	bIsPlay = false;
+
+	PauseAudio();
 }
 
 bool ACPromethActor::Seek(int32 NewFrame, bool InAutoPlay)
@@ -472,7 +475,6 @@ void ACPromethActor::NonAsynPlay()
 	if (this->PlayingTime == 0) {
 		if(!bWaitFrame0){
 			if (this->isFinish()) {// 已播完后重播
-                UCPromethBlueprintLib::PromethDebug("RePlayAPI ", bDebugLog, "NonAsynPlay");
 				this->GetPromethAPI()->RePlay(this->VideoID);
 				/*bWaitFrame0 = true;
 				this->NowFrame = 0;
@@ -480,7 +482,6 @@ void ACPromethActor::NonAsynPlay()
 				return;*/
 			}
 			else {// 第一次播放调StartPlay
-                UCPromethBlueprintLib::PromethDebug("PlayAPI ", bDebugLog, "NonAsynPlay");
 				this->GetPromethAPI()->Play(this->VideoID);
 			}
 			this->NowFrame = 0;
@@ -488,7 +489,6 @@ void ACPromethActor::NonAsynPlay()
 
 		// 等待第0帧解码完成
 		bWaitFrame0 = true;
-        UCPromethBlueprintLib::PromethDebug("GetReadyAPI ", bDebugLog, "NonAsynPlay");
 		if(!this->GetPromethAPI()->FrameIsReady(0, this->VideoID)) return;
 		bWaitFrame0 = false;
 
@@ -497,7 +497,7 @@ void ACPromethActor::NonAsynPlay()
 
 		this->UpdateTime = this->GetTime();
 		this->LastFrameTime = this->GetTime();
-		UCPromethBlueprintLib::PromethDebug("DataLoadSucceed ", bDebugLog, "NonAsynPlay");
+		UCPromethBlueprintLib::PromethDebug("DataLoadSucceed ", bDebugLog, "WaitData", false);
 	}
 
 	// 获取时间差
@@ -505,14 +505,13 @@ void ACPromethActor::NonAsynPlay()
 	this->UpdateTime = this->GetTime();
 	if ((int)((float)this->PlayingTime / (1000. / (float)this->FPS)) > this->NowFrame && !this->bCreating &&( this->NowFrame + 1) < this->FrameCount) {
 		// 获取底层解码情况
-        UCPromethBlueprintLib::PromethDebug("GetReadyAPI -- 2 ", bDebugLog, "NonAsynPlay");
+
 		bool LoadSucceed = this->GetPromethAPI()->FrameIsReady(this->NowFrame + 1, this->VideoID);
 		// 输出加载情况
 		if (LoadSucceed) {
-            UCPromethBlueprintLib::PromethDebug("Create Texture And Mesh", bDebugLog, "NonAsynPlay");
 			if (this->CreateTextureAndMesh(this->NowFrame + 1)) {
 				++this->NowFrame;
-				UCPromethBlueprintLib::PromethDebug("BuildTextureSucceed Frame: " + FString::FromInt(this->NowFrame) + "  Time:" + FString::FromInt(this->GetTime() - this->LastFrameTime), bDebugLog, "NonAsynPlay");
+				UCPromethBlueprintLib::PromethDebug("BuildTextureSucceed Frame: " + FString::FromInt(this->NowFrame) + "  Time:" + FString::FromInt(this->GetTime() - this->LastFrameTime), bDebugLog, "Play");
 				this->LastFrameTime = this->GetTime();
 			}
 			
@@ -585,7 +584,6 @@ void ACPromethActor::ChangeMaterial(UMaterialInterface* NewMaterial)
 	this->Mesh->SetMaterial(0, this->MaterialInst);
 	this->MaterialInst->SetTextureParameterValue("BaseTexture", this->VideoTexture2D);
 }
-
 
 /***************************************************OtherFunctionEnd*****************************************************************/
 
@@ -919,107 +917,34 @@ void ACPromethActor::IOSRHICreateTexture(FRHICommandListImmediate& RHICmdList, i
 
 
 	UE_LOG(LogTemp, Warning, TEXT("TextureDataAtIndex triggered Index:%d"), Frame);
-    if(!((IOSVideoPlayer*)this->GetPromethAPI())->TextureDataAtIndexAPI){
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndexAPI is nullptr", this->bDebugLog, "IOSRHICreateTexture");
-        return;
-    }
-    //TextureDescriptor PicData = ReadPromethFun::GetAPIInst()->TextureDataAtIndexAPI(TCHAR_TO_UTF8(*this->VideoID), Frame);
-    
-    
-    UE418TextureDescriptor PicData = ((IOSVideoPlayer*)this->GetPromethAPI())->UE418_TextureDataAtIndexAPI(TCHAR_TO_UTF8(*this->VideoID), Frame);
-    UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 1", this->bDebugLog, "IOSRHICreateTexture");
-    
+	//TextureDescriptor PicData = ReadPromethFun::GetAPIInst()->TextureDataAtIndexAPI(TCHAR_TO_UTF8(*this->VideoID), Frame);
+	TextureDescriptor PicData = ((IOSVideoPlayer*)this->GetPromethAPI())->TextureDataAtIndexAPI(TCHAR_TO_UTF8(*this->VideoID), Frame);
+
+	UE_LOG(LogTemp, Warning, TEXT("TextureDataAtIndex +"));
 	if (PicData.isValidData)
 	{
-        /*
-        if(!(unsigned char*)PicData.nativeTex){
-            UCPromethBlueprintLib::PromethDebug("PicData.nativeTex is nullptr", this->bDebugLog, "IOSRHICreateTexture");
 
-        }
-        if(!(((unsigned char*)PicData.nativeTex) + 2048*2048*3 - 1)){
-            UCPromethBlueprintLib::PromethDebug("PicData.nativeTex 2048*2048*3 - 1 is nullptr", this->bDebugLog, "IOSRHICreateTexture");
 
-        }
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 2", this->bDebugLog, "IOSRHICreateTexture");
-        */
-        CVMetalTextureRef TextureCacheRef = PicData.textureRef;
-        
-        /*
+		UE_LOG(LogTemp, Warning, TEXT("TextureDataAtIndex ++"));
+
 		CVImageBufferRef pPixelBuffer = (CVImageBufferRef)PicData.nativeTex;
-        //CVImageBufferRef pPixelBuffer = CMSampleBufferGetImageBuffer(PicData.nativeTex);
-        
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 3", this->bDebugLog, "IOSRHICreateTexture");
-        
-		CVMetalTextureRef TextureCacheRef = NULL;
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 4", this->bDebugLog, "IOSRHICreateTexture");
-        if(pPixelBuffer){
-            UCPromethBlueprintLib::PromethDebug("pPixelBuffer is valid", this->bDebugLog, "IOSRHICreateTexture");
-        }
-        else{
-            UCPromethBlueprintLib::PromethDebug("pPixelBuffer is not valid", this->bDebugLog, "IOSRHICreateTexture");
-        }
-		CVReturn Result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, MetalTextureCache, pPixelBuffer, nullptr, MTLPixelFormatBGRA8Unorm, this->VideoWidth, this->VideoHeight, 0, &TextureCacheRef);
-         
-         //var kCVReturnAllocationFailed: CVReturn缓冲区或缓冲池的内存分配失败。
-         //var kCVReturnError: CVReturn发生了一个未定义的错误。
-         //var kCVReturnInvalidArgument: CVReturn函数参数无效。例如，超出范围或类型错误。
-         //var kCVReturnUnsupported: CVReturn
-         //var kCVReturnLast: CVReturn用于标记核心视频结果代码结尾的占位符（不由任何函数返回） 
-         //var kCVReturnFirst: CVReturn用于标记核心视频结果代码开始的占位符（不由任何函数返回）。
-        
-        if(Result == kCVReturnSuccess){
-            UCPromethBlueprintLib::PromethDebug("Result == KCVReturnSuccess", this->bDebugLog, "IOSRHICreateTexture");
-        }
-        if(Result == kCVReturnAllocationFailed){
-            UCPromethBlueprintLib::PromethDebug("Result == kCVReturnAllocationFailed: ", this->bDebugLog, "IOSRHICreateTexture");
-        }
-         if(Result == kCVReturnError){
-             UCPromethBlueprintLib::PromethDebug("Result == kCVReturnError: ", this->bDebugLog, "IOSRHICreateTexture");
-         }
-         if(Result == kCVReturnInvalidArgument){
-             UCPromethBlueprintLib::PromethDebug("Result == kCVReturnInvalidArgument: ", this->bDebugLog, "IOSRHICreateTexture");
-         }
-         if(Result == kCVReturnUnsupported){
-             UCPromethBlueprintLib::PromethDebug("Result == kCVReturnUnsupported: ", this->bDebugLog, "IOSRHICreateTexture");
-         }
-         if(Result == kCVReturnLast){
-             UCPromethBlueprintLib::PromethDebug("Result == kCVReturnLast: ", this->bDebugLog, "IOSRHICreateTexture");
-         }
-         if(Result == kCVReturnFirst){
-             UCPromethBlueprintLib::PromethDebug("Result == kCVReturnFirst: ", this->bDebugLog, "IOSRHICreateTexture");
-         }
-         */
-                                                                     
-        if(TextureCacheRef){
-            UCPromethBlueprintLib::PromethDebug("TextureCacheRef is valid", this->bDebugLog, "IOSRHICreateTexture");
-        }
-        else{
-            UCPromethBlueprintLib::PromethDebug("TextureCacheRef is not valid", this->bDebugLog, "IOSRHICreateTexture");
-        }
-        
-        check(TextureCacheRef);
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 5", this->bDebugLog, "IOSRHICreateTexture");
-        
-		FRHIResourceCreateInfo CreateInfo(new FAppleMovieStreamerTexture2DResourceWrapper_My(TextureCacheRef));
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 6", this->bDebugLog, "IOSRHICreateTexture");
 
+		CVMetalTextureRef TextureCacheRef = NULL;
+		CVReturn Result = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault, MetalTextureCache, pPixelBuffer, nullptr, MTLPixelFormatBGRA8Unorm, this->VideoWidth, this->VideoHeight, 0, &TextureCacheRef);
+		FRHIResourceCreateInfo CreateInfo(new FAppleMovieStreamerTexture2DResourceWrapper_My(TextureCacheRef));
 		FTexture2DRHIRef MediaWrappedTexture = RHICreateTexture2D(this->VideoWidth, this->VideoHeight, PF_R8G8B8A8, 1, 1, TexCreate_Dynamic | TexCreate_NoTiling, CreateInfo);
 
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 7", this->bDebugLog, "IOSRHICreateTexture");
- 
-        FTextureReferenceRHIRef MyTextureRHI = this->VideoTexture2D->TextureReference.TextureReferenceRHI;
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 9", this->bDebugLog, "IOSRHICreateTexture");
-        
-        FRHITexture2D* TexSource = MediaWrappedTexture.GetReference();
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 10", this->bDebugLog, "IOSRHICreateTexture");
-        
-        MyTextureRHI->SetReferencedTexture(TexSource);
-        UCPromethBlueprintLib::PromethDebug("TextureDataAtIndex 11", this->bDebugLog, "IOSRHICreateTexture");
 
+		ENQUEUE_RENDER_COMMAND(CopyTextureCommand)([this, MediaWrappedTexture](FRHICommandListImmediate& RHICmdList) {
 
+			FTextureReferenceRHIRef MyTextureRHI = this->VideoTexture2D->TextureReference.TextureReferenceRHI;
+			FRHITexture2D* TexSource = MediaWrappedTexture.GetReference();
+			MyTextureRHI->SetReferencedTexture(TexSource);
+
+			});
+
+		CFRelease(TextureCacheRef);
 	}
-    this->MaterialInst->SetTextureParameterValue("BaseTexture", this->VideoTexture2D);
-
 #endif
 }
 
@@ -1027,8 +952,44 @@ void ACPromethActor::RHICreateMesh(FRHICommandListImmediate& RHICmdList, int Fra
 	this->GetPromethAPI()->CreateMesh(RHICmdList, Frame, this->Mesh, &InputMeshParam, this->MaterialInst, this->VideoID);
 }
 
+void ACPromethActor::initAudio(FString AudioPathParam)
+{
+	URuntimeAudioImporterLibrary* LibraryIns = URuntimeAudioImporterLibrary::CreateRuntimeAudioImporter();
+	if (!IsValid(LibraryIns))
+		return;
 
+	LibraryIns->OnResult.AddDynamic(this, &ACPromethActor::OnResult);
+	LibraryIns->ImportAudioFromFile(AudioPathParam, EAudioFormat::Auto);
+}
 
+void ACPromethActor::OnResult(class URuntimeAudioImporterLibrary* Importer, class UImportedSoundWave* ImportedSoundWave, ETranscodingStatus Status)
+{
+	AuidoSoundWave = ImportedSoundWave;
+	AuidoStatus = Status;
 
+	//音频加载比较慢 如果这个时候已经运行了，则在加载完成之后一起播放
+	if (bIsPlay)
+	{
+		Play();
+	}
+}
+
+void ACPromethActor::PlayAudio()
+{
+	if (AuidoStatus != ETranscodingStatus::SuccessfulImport)
+		return;
+
+	if (!IsValid(LocalAuidoCom))
+		LocalAuidoCom = UGameplayStatics::SpawnSound2D(this, AuidoSoundWave);
+	else
+		LocalAuidoCom->SetPaused(false);
+}
+
+void ACPromethActor::PauseAudio()
+{
+	if (!IsValid(LocalAuidoCom))
+		return;
+	LocalAuidoCom->SetPaused(true);
+}
 
 
